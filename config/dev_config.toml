@@ -1,6 +1,7 @@
 [Server]
 name = "Web-demo"
 port = 8889
+cors = true
 
 [mysql]
 [mysql.read] # 从库信息，可读
@@ -17,3 +18,7 @@ port = 8889
     maxOpenConn = 10             # 最大打开的连接数
     maxIdleConn = 60             # 闲置的连接数
     connMaxLifeTime = 60         # 最大连接超时(单位:分)
+
+[jwt]
+secret = '21ddG1tdHyuJTrw7retY'  # JWT secret
+expireDuration = 12              # JWT ExpiresAt 过期时间(单位:小时)

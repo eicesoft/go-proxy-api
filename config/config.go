@@ -13,6 +13,7 @@ type Config struct {
 	Server struct {
 		Name string `toml:"name"`
 		Port string `toml:"port"`
+		Cors bool   `toml:"cors"` //是否开启Cors
 	} `toml:"Server"`
 
 	MySQL struct {
@@ -34,6 +35,11 @@ type Config struct {
 			ConnMaxLifeTime time.Duration `toml:"connMaxLifeTime"`
 		} `toml:"base"`
 	} `toml:"mysql"`
+
+	JWT struct {
+		Secret         string        `toml:"secret"`
+		ExpireDuration time.Duration `toml:"expireDuration"`
+	} `toml:"jwt"`
 }
 
 func init() {

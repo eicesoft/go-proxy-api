@@ -1,7 +1,7 @@
 package user_controller
 
 import (
-	"eicesoft/web-demo/app/code"
+	"eicesoft/web-demo/app/message"
 	"eicesoft/web-demo/app/model/user"
 	"eicesoft/web-demo/pkg/core"
 	"eicesoft/web-demo/pkg/errno"
@@ -14,7 +14,7 @@ type detailRequest struct {
 }
 
 type detailResponse struct {
-	Id       int32       `json:"id"`        // 用户主键ID
+	Id       int64       `json:"id"`        // 用户主键ID
 	UserName string      `json:"user_name"` // 用户名
 	NickName string      `json:"nick_name"` // 昵称
 	Data     interface{} `json:"data"`
@@ -47,8 +47,8 @@ func (h *handler) Detail() (string, core.HandlerFunc) {
 		if err := c.ShouldBindURI(req); err != nil {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,
-				code.ParamBindError,
-				code.Text(code.ParamBindError)).WithErr(err),
+				message.ParamBindError,
+				message.Text(message.ParamBindError)).WithErr(err),
 			)
 			return
 		}
@@ -59,13 +59,13 @@ func (h *handler) Detail() (string, core.HandlerFunc) {
 		if req.UserName != "sdg" {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,
-				code.ParamBindError,
-				code.Text(code.ParamBindError)),
+				message.ParamBindError,
+				message.Text(message.ParamBindError)),
 			)
 			return
 		}
 
-		res.Id = 2009
+		res.Id = c.UserID()
 		res.UserName = req.UserName
 		res.NickName = req.UserName + "_nick"
 		res.Data = u

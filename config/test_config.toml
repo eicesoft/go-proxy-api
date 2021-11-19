@@ -1,6 +1,7 @@
 [Server]
 name = "Web-demo"
 port = 8810
+cors = true
 
 [mysql]
 [mysql.read] # 从库信息，可读
