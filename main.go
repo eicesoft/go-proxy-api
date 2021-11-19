@@ -10,6 +10,7 @@ import (
 	"eicesoft/web-demo/router"
 	"fmt"
 	"go.uber.org/zap"
+	"math/rand"
 	"net/http"
 	"time"
 )
@@ -23,6 +24,8 @@ import (
 // @license.name MIT
 // @BasePath
 func main() {
+	rand.Seed(time.Now().Unix())
+
 	loggers, err := logger.NewJSONLogger(
 		logger.WithDebugLevel(),
 		logger.WithField("app", fmt.Sprintf("%s[%s]", config.Get().Server.Name, env.Get().Value())),

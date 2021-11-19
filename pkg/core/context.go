@@ -22,7 +22,6 @@ const (
 	_BodyName       = "_body_"
 	_PayloadName    = "_payload_"
 	_UserID         = "_user_id_"
-	_UserName       = "_user_name_"
 	_AbortErrorName = "_abort_error_"
 )
 
@@ -114,6 +113,10 @@ type Context interface {
 	// Logger 获取 Logger 对象
 	Logger() *zap.Logger
 	setLogger(logger *zap.Logger)
+
+	// UserID 获取 JWT 中 UserID
+	UserID() int64
+	setUserID(userID int64)
 }
 
 type context struct {
@@ -307,6 +310,19 @@ func (c *context) setTrace(trace Trace) {
 
 func (c *context) disableTrace() {
 	c.setTrace(nil)
+}
+
+func (c *context) UserID() int64 {
+	val, ok := c.ctx.Get(_UserID)
+	if !ok {
+		return 0
+	}
+
+	return val.(int64)
+}
+
+func (c *context) setUserID(userID int64) {
+	c.ctx.Set(_UserID, userID)
 }
 
 func (c *context) init() {

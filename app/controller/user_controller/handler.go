@@ -31,7 +31,7 @@ func New(logger *zap.Logger, db db.Repo) Handler {
 }
 
 func (h *handler) RegistryRouter(r *mux.Resource) {
-	user := r.Mux.Group(GroupRouterName)
+	user := r.Mux.Group(GroupRouterName, core.WrapAuthHandler(r.Middles.Jwt))
 
 	user.GET(h.Detail())
 	user.GET(h.Test())

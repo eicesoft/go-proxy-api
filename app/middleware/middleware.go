@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"eicesoft/web-demo/pkg/core"
+	"eicesoft/web-demo/pkg/errno"
 	"go.uber.org/zap"
 )
 
@@ -10,6 +11,9 @@ var _ Middleware = (*middleware)(nil)
 type Middleware interface {
 	// i 为了避免被其他包实现
 	i()
+
+	// Jwt JWT 中间件
+	Jwt(ctx core.Context) (userId int64, err errno.Error)
 
 	// DisableLog 不记录日志
 	DisableLog() core.HandlerFunc
