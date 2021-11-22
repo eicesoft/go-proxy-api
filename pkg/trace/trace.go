@@ -12,7 +12,7 @@ const Header = "TRACE-ID"
 var _ T = (*Trace)(nil)
 
 type T interface {
-	i()
+	private()
 	ID() string
 	WithRequest(req *Request) *Trace
 	WithResponse(resp *Response) *Trace
@@ -65,7 +65,10 @@ type Response struct {
 func New(id string) *Trace {
 	if id == "" {
 		buf := make([]byte, 10)
-		io.ReadFull(rand.Reader, buf)
+		_, err := io.ReadFull(rand.Reader, buf)
+		if err != nil {
+			return nil
+		}
 		id = hex.EncodeToString(buf)
 	}
 
@@ -74,7 +77,7 @@ func New(id string) *Trace {
 	}
 }
 
-func (t *Trace) i() {}
+func (t *Trace) private() {}
 
 // ID 唯一标识符
 func (t *Trace) ID() string {

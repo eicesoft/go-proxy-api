@@ -40,7 +40,7 @@ func wrapHandlers(handlers ...HandlerFunc) []gin.HandlerFunc {
 	return funcs
 }
 
-// WrapAuthHandler 用来处理 Auth 的入口，在之后的handler中只需 ctx.UserID() ctx.UserName() 即可。
+// WrapAuthHandler 用来处理 Auth 的入口，在之后的handler中只需 ctx.UserID()
 func WrapAuthHandler(handler func(Context) (userID int64, err errno.Error)) HandlerFunc {
 	return func(ctx Context) {
 		userID, err := handler(ctx)
