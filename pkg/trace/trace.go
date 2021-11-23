@@ -12,7 +12,7 @@ const Header = "TRACE-ID"
 var _ T = (*Trace)(nil)
 
 type T interface {
-	private()
+	p()
 	ID() string
 	WithRequest(req *Request) *Trace
 	WithResponse(resp *Response) *Trace
@@ -77,7 +77,7 @@ func New(id string) *Trace {
 	}
 }
 
-func (t *Trace) private() {}
+func (t *Trace) p() {}
 
 // ID 唯一标识符
 func (t *Trace) ID() string {

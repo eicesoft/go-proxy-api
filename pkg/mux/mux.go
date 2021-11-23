@@ -1,7 +1,7 @@
 package mux
 
 import (
-	"eicesoft/web-demo/app/middleware"
+	"eicesoft/web-demo/internal/middleware"
 	"eicesoft/web-demo/pkg/core"
 	"eicesoft/web-demo/pkg/db"
 	"go.uber.org/zap"

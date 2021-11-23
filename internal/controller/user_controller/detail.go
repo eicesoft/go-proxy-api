@@ -1,8 +1,7 @@
 package user_controller
 
 import (
-	"eicesoft/web-demo/app/message"
-	"eicesoft/web-demo/app/model/user"
+	"eicesoft/web-demo/internal/message"
 	"eicesoft/web-demo/pkg/core"
 	"eicesoft/web-demo/pkg/errno"
 	"github.com/gin-gonic/gin"
@@ -37,8 +36,8 @@ func (h *handler) Test() (string, core.HandlerFunc) {
 // @Produce  json
 // @Param username path string true "用户名"
 // @Success 200 {object} detailResponse
-// @Failure 400 {object} code.Failure
-// @Failure 401 {object} code.Failure
+// @Failure 400 {object} message.Failure
+// @Failure 401 {object} message.Failure
 // @Router /user/get/{username} [get]
 func (h *handler) Detail() (string, core.HandlerFunc) {
 	return "get/:username", func(c core.Context) {
@@ -53,8 +52,10 @@ func (h *handler) Detail() (string, core.HandlerFunc) {
 			return
 		}
 
-		u := user.User{}
-		h.db.GetDbR().WithContext(c.RequestContext()).First(&u)
+		u := h.userService.Get()
+
+		//u := user.User{}
+		//h.db.GetDbR().WithContext(c.RequestContext()).First(&u)
 
 		if req.UserName != "sdg" {
 			c.AbortWithError(errno.NewError(

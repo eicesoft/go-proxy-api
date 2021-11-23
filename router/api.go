@@ -1,8 +1,9 @@
 package router
 
 import (
-	"eicesoft/web-demo/app/controller/auth_controller"
-	"eicesoft/web-demo/app/controller/user_controller"
+	"eicesoft/web-demo/internal/controller/auth_controller"
+	"eicesoft/web-demo/internal/controller/order_controller"
+	"eicesoft/web-demo/internal/controller/user_controller"
 	"eicesoft/web-demo/pkg/mux"
 )
 
@@ -10,4 +11,5 @@ import (
 func setApiRouter(r *mux.Resource) {
 	user_controller.New(r.GetLogger(), r.GetDb()).RegistryRouter(r)
 	auth_controller.New(r.GetLogger(), r.GetDb()).RegistryRouter(r)
+	order_controller.New(r.GetLogger(), r.GetDb()).RegistryRouter(r)
 }

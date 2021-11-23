@@ -1,5 +1,6 @@
 package user
 
+//go:generate gormgen -structs User -input .
 type User struct {
 	Id        int32  `gorm:"primaryKey" json:"id"` // 主键
 	Uid       string `json:"uid"`

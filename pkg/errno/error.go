@@ -8,7 +8,7 @@ import (
 var _ Error = (*err)(nil)
 
 type Error interface {
-	private()
+	p()
 	// WithErr 设置错误信息
 	WithErr(err error) Error
 	// GetBusinessCode 获取 Business Code
@@ -36,7 +36,7 @@ func NewError(httpCode, businessCode int, msg string) Error {
 	}
 }
 
-func (e *err) private() {}
+func (e *err) p() {}
 
 func (e *err) WithErr(err error) Error {
 	e.Err = errors.WithStack(err)

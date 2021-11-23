@@ -35,7 +35,7 @@ type Environment interface {
 	IsTest() bool
 	IsStag() bool
 	IsProd() bool
-	t()
+	p()
 }
 
 func (e *environment) IsDev() bool {
@@ -54,11 +54,10 @@ func (e *environment) IsProd() bool {
 	return e.value == ProdEnv
 }
 
-func (e *environment) t() {}
+func (e *environment) p() {}
 
 func init() {
 	env := flag.String("env", "", "请输入运行环境:\n dev:开发环境\n test:测试环境\n stag:预上线环境\n prod:正式环境\n")
-	flag.Parse()
 
 	switch strings.ToLower(strings.TrimSpace(*env)) {
 	case "dev":

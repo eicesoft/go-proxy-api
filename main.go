@@ -8,6 +8,7 @@ import (
 	"eicesoft/web-demo/pkg/logger"
 	"eicesoft/web-demo/pkg/shutdown"
 	"eicesoft/web-demo/router"
+	"flag"
 	"fmt"
 	"go.uber.org/zap"
 	"math/rand"
@@ -15,7 +16,15 @@ import (
 	"time"
 )
 
-// @title Gin MVC demo doc
+func init() {
+	if !flag.Parsed() {
+		flag.Parse()
+	}
+
+	rand.Seed(time.Now().Unix())
+}
+
+// @title Gin MVC demo service
 // @version 0.1.1
 // @description  This is a sample server for gin mvc demo
 // @contact.name kelezyb
@@ -24,8 +33,6 @@ import (
 // @license.name MIT
 // @BasePath
 func main() {
-	rand.Seed(time.Now().Unix())
-
 	loggers, err := logger.NewJSONLogger(
 		logger.WithDebugLevel(),
 		logger.WithField("app", fmt.Sprintf("%s[%s]", config.Get().Server.Name, env.Get().Value())),

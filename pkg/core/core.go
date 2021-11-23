@@ -1,9 +1,9 @@
 package core
 
 import (
-	"eicesoft/web-demo/app/message"
 	"eicesoft/web-demo/config"
 	_ "eicesoft/web-demo/docs"
+	"eicesoft/web-demo/internal/message"
 	"eicesoft/web-demo/pkg/color"
 	"eicesoft/web-demo/pkg/env"
 	"eicesoft/web-demo/pkg/errno"
@@ -17,13 +17,32 @@ import (
 	"go.uber.org/zap"
 	"net/http"
 	"net/url"
+	"reflect"
 	"runtime/debug"
 	"time"
+)
+
+const (
+	ServerHeader = "Server"
+	ServerName   = "Gee Server"
 )
 
 //func DisableTrace(ctx Context) {
 //	ctx.disableTrace()
 //}
+
+// StructCopy 从value复制结构数据到 binding 中
+func StructCopy(binding interface{}, value interface{}) {
+	bVal := reflect.ValueOf(binding).Elem()
+	vVal := reflect.ValueOf(value).Elem()
+	vTypeOfT := vVal.Type()
+	for i := 0; i < vVal.NumField(); i++ {
+		name := vTypeOfT.Field(i).Name
+		if ok := bVal.FieldByName(name).IsValid(); ok { //目标结构中存在字段
+			bVal.FieldByName(name).Set(reflect.ValueOf(vVal.Field(i).Interface())) //
+		}
+	}
+}
 
 func wrapHandlers(handlers ...HandlerFunc) []gin.HandlerFunc {
 	funcs := make([]gin.HandlerFunc, len(handlers))
@@ -185,6 +204,7 @@ func New(logger *zap.Logger) (Mux, error) {
 	mux.engine.Use(func(ctx *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
+				//panic(err)
 				logger.Error("got panic", zap.String("panic", fmt.Sprintf("%+v", err)), zap.String("stack", string(debug.Stack())))
 			}
 		}()
@@ -230,6 +250,8 @@ func New(logger *zap.Logger) (Mux, error) {
 
 		defer func() {
 			if err := recover(); err != nil {
+				logger.Error("Http request Error:", zap.Any("err", err))
+
 				context.AbortWithError(errno.NewError(
 					http.StatusInternalServerError,
 					message.ServerError,
@@ -247,6 +269,8 @@ func New(logger *zap.Logger) (Mux, error) {
 				abortErr        error
 				//traceId         string
 			)
+
+			context.SetHeader(ServerHeader, ServerName)
 
 			if ctx.IsAborted() { //
 				if err := context.abortError(); err != nil {

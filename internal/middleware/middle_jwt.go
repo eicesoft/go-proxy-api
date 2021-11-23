@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"eicesoft/web-demo/app/message"
 	"eicesoft/web-demo/config"
+	"eicesoft/web-demo/internal/message"
 	"eicesoft/web-demo/pkg/core"
 	"eicesoft/web-demo/pkg/errno"
 	"eicesoft/web-demo/pkg/token"

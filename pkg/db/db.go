@@ -13,7 +13,7 @@ import (
 var _ Repo = (*dbRepo)(nil)
 
 type Repo interface {
-	private()
+	p()
 	GetDbR() *gorm.DB
 	GetDbW() *gorm.DB
 	DbRClose() error
@@ -43,7 +43,7 @@ func New() (Repo, error) {
 	}, nil
 }
 
-func (d *dbRepo) private() {}
+func (d *dbRepo) p() {}
 
 func (d *dbRepo) GetDbR() *gorm.DB {
 	return d.DbR

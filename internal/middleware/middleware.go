@@ -10,7 +10,7 @@ var _ Middleware = (*middleware)(nil)
 
 type Middleware interface {
 	// private 为了避免被其他包实现
-	private()
+	p()
 
 	// Jwt JWT 中间件
 	Jwt(ctx core.Context) (userId int64, err errno.Error)
@@ -29,4 +29,4 @@ func New(logger *zap.Logger) *middleware {
 	}
 }
 
-func (m *middleware) private() {}
+func (m *middleware) p() {}

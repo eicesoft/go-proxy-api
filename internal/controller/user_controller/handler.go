@@ -1,6 +1,7 @@
 package user_controller
 
 import (
+	"eicesoft/web-demo/internal/service/user_service"
 	"eicesoft/web-demo/pkg/core"
 	"eicesoft/web-demo/pkg/db"
 	"eicesoft/web-demo/pkg/mux"
@@ -19,14 +20,16 @@ type Handler interface {
 }
 
 type handler struct {
-	logger *zap.Logger
-	db     db.Repo
+	logger      *zap.Logger
+	db          db.Repo
+	userService user_service.UserService
 }
 
 func New(logger *zap.Logger, db db.Repo) Handler {
 	return &handler{
-		logger: logger,
-		db:     db,
+		logger:      logger,
+		db:          db,
+		userService: user_service.NewUserService(db),
 	}
 }
 
