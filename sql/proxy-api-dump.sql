@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `apps`
+--
+
+DROP TABLE IF EXISTS `apps`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `apps` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `app_key` varchar(32) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `app_secret` varchar(64) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+  `created_at` int DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `apps`
+--
+
+LOCK TABLES `apps` WRITE;
+/*!40000 ALTER TABLE `apps` DISABLE KEYS */;
+INSERT INTO `apps` VALUES (1,'第一个企业','b9437938b99d693fe6dd54fd96872623','13657f2842a14aa64e99264aafc323f1c4d85c10a37572adca67b8b1b0b06bc7',1705154786);
+/*!40000 ALTER TABLE `apps` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `members`
 --
 
@@ -61,7 +88,7 @@ CREATE TABLE `request_logs` (
   `created_at` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `request_logs_client_id_app_id_created_at_index` (`client_id`,`app_id`,`created_at`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -70,7 +97,7 @@ CREATE TABLE `request_logs` (
 
 LOCK TABLES `request_logs` WRITE;
 /*!40000 ALTER TABLE `request_logs` DISABLE KEYS */;
-INSERT INTO `request_logs` VALUES (1,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',0,1705146504),(2,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',0,1705146594),(3,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147390),(4,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147572),(5,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147585),(6,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147607);
+INSERT INTO `request_logs` VALUES (1,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',0,1705146504),(2,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',0,1705146594),(3,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147390),(4,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147572),(5,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147585),(6,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147607),(7,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',4627,1705147913),(8,1,'/post','{\"password\": \"dsgsdg\", \"username\": \"testuser\"}',1,1705156951);
 /*!40000 ALTER TABLE `request_logs` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -83,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-01-13 20:08:30
+-- Dump completed on 2024-01-13 22:44:24

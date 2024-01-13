@@ -8,6 +8,7 @@ import (
 	"eicesoft/proxy-api/pkg/logger"
 	"eicesoft/proxy-api/pkg/shutdown"
 	"eicesoft/proxy-api/router"
+	"errors"
 	"flag"
 	"fmt"
 	"go.uber.org/zap"
@@ -42,7 +43,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer loggers.Sync()
+	defer func() {
+		_ = loggers.Sync()
+	}()
 
 	// 初始化 DB
 	dbRepo, err := db.New()
@@ -64,7 +67,7 @@ func main() {
 	}
 
 	go func() {
-		if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+		if err := server.ListenAndServe(); err != nil && !errors.Is(err, http.ErrServerClosed) {
 			loggers.Fatal("http server startup err", zap.Error(err))
 		}
 	}()
