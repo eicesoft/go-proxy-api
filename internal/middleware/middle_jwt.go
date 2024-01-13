@@ -10,7 +10,7 @@ import (
 	"net/http"
 )
 
-func (m *middleware) Jwt(ctx core.Context) (userId int64, err errno.Error) {
+func (m *middleware) Jwt(ctx core.Context) (userId int32, err errno.Error) {
 	auth := ctx.GetHeader("Authorization")
 	if auth == "" {
 		err = errno.NewError(

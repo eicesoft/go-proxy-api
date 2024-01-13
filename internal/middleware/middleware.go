@@ -13,7 +13,7 @@ type Middleware interface {
 	p()
 
 	// Jwt JWT 中间件
-	Jwt(ctx core.Context) (userId int64, err errno.Error)
+	Jwt(ctx core.Context) (userId int32, err errno.Error)
 
 	// DisableLog 不记录日志
 	DisableLog() core.HandlerFunc

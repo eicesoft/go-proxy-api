@@ -8,8 +8,7 @@ import (
 var _ UserService = (*userService)(nil)
 
 type UserService interface {
-	// private 为了避免被其他包实现
-	p()
+	p() // private 为了避免被其他包实现
 	Get() user.User
 }
 
@@ -20,7 +19,7 @@ type userService struct {
 func (us *userService) Get() user.User {
 	user := user.User{}
 	user.Uid = "200"
-	user.Email = "Email@aefasf.com"
+	//user.Email = "Email@aefasf.com"
 	//user.Create(us.db.GetDbR().WithContext(ctx))
 	us.db.GetDbR().First(&user)
 

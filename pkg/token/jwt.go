@@ -13,7 +13,7 @@ import (
 // sub: （Subject）该JWT的主题
 // nbf: （Not Before）不要早于这个时间
 // jti: （JWT ID）用于标识JWT的唯一ID
-func (t *token) JwtSign(userId int64, expireDuration time.Duration) (tokenString string, err error) {
+func (t *token) JwtSign(userId int32, expireDuration time.Duration) (tokenString string, err error) {
 	claims := claims{
 		userId,
 		jwt.StandardClaims{

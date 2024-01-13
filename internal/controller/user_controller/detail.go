@@ -2,6 +2,7 @@ package user_controller
 
 import (
 	"eicesoft/web-demo/internal/message"
+	"eicesoft/web-demo/internal/service/client_service"
 	"eicesoft/web-demo/pkg/core"
 	"eicesoft/web-demo/pkg/errno"
 	"github.com/gin-gonic/gin"
@@ -13,17 +14,45 @@ type detailRequest struct {
 }
 
 type detailResponse struct {
-	Id       int64       `json:"id"`        // 用户主键ID
+	Id       int32       `json:"id"`        // 用户主键ID
 	UserName string      `json:"user_name"` // 用户名
 	NickName string      `json:"nick_name"` // 昵称
 	Data     interface{} `json:"data"`
 }
 
+type testResponse struct {
+	Args    interface{} `json:"args"`
+	Data    string      `json:"data"`
+	Files   interface{} `json:"files"`
+	Form    interface{} `json:"form"`
+	Headers interface{} `json:"headers"`
+	Json    interface{} `json:"json"`
+	Origin  string      `json:"origin"`
+	Url     string      `json:"url"`
+}
+
 func (h *handler) Test() (string, core.HandlerFunc) {
 	return "test", func(c core.Context) {
+		//h.clientService.
+		resp, err := h.clientService.
+			WithContext(c).
+			Test(map[string]string{"username": "testuser", "password": "dsgsdg"})
+
+		if err != nil {
+			c.AbortWithError(errno.NewError(
+				http.StatusBadRequest,
+				message.CallHTTPError,
+				message.Text(message.CallHTTPError, err.Error())).WithErr(err),
+			)
+		}
+
+		var response testResponse
+
+		_ = client_service.ConvertStruct[testResponse](resp.(map[string]interface{}), &response)
+
 		c.Payload(gin.H{
 			"message": "这个是一个Gin.H消息",
-			"data":    c.Header(),
+			"data":    response,
 		})
 	}
 }

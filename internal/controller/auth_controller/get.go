@@ -38,7 +38,7 @@ func (h *handler) Get() (string, core.HandlerFunc) {
 		}
 
 		cfg := config.Get().JWT
-		tokenString, err := token.New(cfg.Secret).JwtSign(rand.Int63n(10000), time.Hour*cfg.ExpireDuration)
+		tokenString, err := token.New(cfg.Secret).JwtSign(rand.Int31(), time.Hour*cfg.ExpireDuration)
 		if err != nil {
 			c.AbortWithError(errno.NewError(
 				http.StatusBadRequest,

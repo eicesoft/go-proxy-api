@@ -1,5 +1,7 @@
 package message
 
+import "fmt"
+
 // Failure 错误时返回结构
 type Failure struct {
 	Code    int    `json:"code"`    // 业务码
@@ -20,9 +22,9 @@ var codeText = map[int]string{
 	TooManyRequests:    "Too Many Requests",
 	ParamBindError:     "参数信息有误",
 	AuthorizationError: "签名信息有误",
-	CallHTTPError:      "调用第三方 HTTP 接口失败",
+	CallHTTPError:      "调用第三方 HTTP 接口失败 %s",
 }
 
-func Text(code int) string {
-	return codeText[code]
+func Text(code int, a ...any) string {
+	return fmt.Sprintf(codeText[code], a...)
 }

@@ -21,7 +21,7 @@ func init() {
 		flag.Parse()
 	}
 
-	rand.Seed(time.Now().Unix())
+	rand.New(rand.NewSource(time.Now().Unix()))
 }
 
 // @title Gin MVC demo service

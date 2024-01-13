@@ -11,7 +11,7 @@ type Token interface {
 	d()
 
 	// JwtSign JWT 签名方式
-	JwtSign(userId int64, expireDuration time.Duration) (tokenString string, err error)
+	JwtSign(userId int32, expireDuration time.Duration) (tokenString string, err error)
 	// JwtParse JWT解析
 	JwtParse(tokenString string) (*claims, error)
 }
@@ -21,7 +21,7 @@ type token struct {
 }
 
 type claims struct {
-	UserID int64
+	UserID int32
 	jwt.StandardClaims
 }
 

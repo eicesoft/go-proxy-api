@@ -27,7 +27,7 @@ const (
 	ServerName   = "Gee Server"
 )
 
-//func DisableTrace(ctx Context) {
+//func DisableTrace(ctx context) {
 //	ctx.disableTrace()
 //}
 
@@ -60,7 +60,7 @@ func wrapHandlers(handlers ...HandlerFunc) []gin.HandlerFunc {
 }
 
 // WrapAuthHandler 用来处理 Auth 的入口，在之后的handler中只需 ctx.UserID()
-func WrapAuthHandler(handler func(Context) (userID int64, err errno.Error)) HandlerFunc {
+func WrapAuthHandler(handler func(Context) (userID int32, err errno.Error)) HandlerFunc {
 	return func(ctx Context) {
 		userID, err := handler(ctx)
 		if err != nil {
@@ -341,7 +341,7 @@ func New(logger *zap.Logger) (Mux, error) {
 				zap.Any("success", t.Success),
 				zap.Any("cost_seconds", t.CostSeconds),
 				zap.Any("trace_id", t.Identifier),
-				zap.Any("trace_info", t),
+				//zap.Any("trace_info", t),
 				zap.Error(abortErr),
 			)
 		}()

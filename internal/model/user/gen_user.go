@@ -7,8 +7,8 @@ package user
 
 import (
 	"eicesoft/web-demo/internal/model"
+	"eicesoft/web-demo/pkg/core"
 	"fmt"
-
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )
@@ -19,6 +19,10 @@ func NewModel() *User {
 
 func NewQueryBuilder() *userQueryBuilder {
 	return new(userQueryBuilder)
+}
+
+func (t *User) Assign(src interface{}) {
+	core.StructCopy(t, src)
 }
 
 func (t *User) Create(db *gorm.DB) (id int32, err error) {
@@ -50,6 +54,21 @@ type userQueryBuilder struct {
 	}
 	limit  int
 	offset int
+}
+
+func (qb *userQueryBuilder) Updates(db *gorm.DB, m map[string]interface{}) (err error) {
+	if err = qb.buildUpdateQuery(db).Updates(m).Error; err != nil {
+		return errors.Wrap(err, "updates err")
+	}
+	return nil
+}
+
+func (qb *userQueryBuilder) buildUpdateQuery(db *gorm.DB) *gorm.DB {
+	ret := db.Model(&User{})
+	for _, where := range qb.where {
+		ret = ret.Where(where.prefix, where.value)
+	}
+	return ret
 }
 
 func (qb *userQueryBuilder) buildQuery(db *gorm.DB) *gorm.DB {

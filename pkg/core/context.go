@@ -5,14 +5,15 @@ import (
 	stdctx "context"
 	"eicesoft/web-demo/pkg/errno"
 	"eicesoft/web-demo/pkg/trace"
-	"github.com/gin-gonic/gin"
-	"github.com/gin-gonic/gin/binding"
-	"go.uber.org/zap"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
 	"sync"
+
+	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"go.uber.org/zap"
 )
 
 const (
@@ -115,8 +116,8 @@ type Context interface {
 	setLogger(logger *zap.Logger)
 
 	// UserID 获取 JWT 中 UserID
-	UserID() int64
-	setUserID(userID int64)
+	UserID() int32
+	setUserID(userID int32)
 }
 
 type context struct {
@@ -259,6 +260,7 @@ func (c *context) setAlias(path string) {
 
 func (c *context) AbortWithError(err errno.Error) {
 	if err != nil {
+		c.ctx.Header("Content-Type", "application/json")
 		httpCode := err.GetHttpCode()
 		if httpCode == 0 {
 			httpCode = http.StatusInternalServerError
@@ -312,16 +314,16 @@ func (c *context) disableTrace() {
 	c.setTrace(nil)
 }
 
-func (c *context) UserID() int64 {
+func (c *context) UserID() int32 {
 	val, ok := c.ctx.Get(_UserID)
 	if !ok {
 		return 0
 	}
 
-	return val.(int64)
+	return val.(int32)
 }
 
-func (c *context) setUserID(userID int64) {
+func (c *context) setUserID(userID int32) {
 	c.ctx.Set(_UserID, userID)
 }
 
@@ -331,6 +333,6 @@ func (c *context) init() {
 		panic(err)
 	}
 
-	c.ctx.Set(_BodyName, body)                                   // cache body是为了trace使用
-	c.ctx.Request.Body = ioutil.NopCloser(bytes.NewBuffer(body)) // re-construct req body
+	c.ctx.Set(_BodyName, body)                               // cache body是为了trace使用
+	c.ctx.Request.Body = io.NopCloser(bytes.NewBuffer(body)) // re-construct req body
 }
