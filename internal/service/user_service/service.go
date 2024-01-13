@@ -1,8 +1,8 @@
 package user_service
 
 import (
-	"eicesoft/web-demo/internal/model/user"
-	"eicesoft/web-demo/pkg/db"
+	"eicesoft/proxy-api/internal/model/user"
+	"eicesoft/proxy-api/pkg/db"
 )
 
 var _ UserService = (*userService)(nil)

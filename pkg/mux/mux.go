@@ -1,9 +1,9 @@
 package mux
 
 import (
-	"eicesoft/web-demo/internal/middleware"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
+	"eicesoft/proxy-api/internal/middleware"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
 	"go.uber.org/zap"
 )
 

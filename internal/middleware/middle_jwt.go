@@ -1,11 +1,11 @@
 package middleware
 
 import (
-	"eicesoft/web-demo/config"
-	"eicesoft/web-demo/internal/message"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/errno"
-	"eicesoft/web-demo/pkg/token"
+	"eicesoft/proxy-api/config"
+	"eicesoft/proxy-api/internal/message"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/errno"
+	"eicesoft/proxy-api/pkg/token"
 	"github.com/pkg/errors"
 	"net/http"
 )

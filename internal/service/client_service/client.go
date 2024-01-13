@@ -1,9 +1,9 @@
 package client_service
 
 import (
-	"eicesoft/web-demo/internal/model/request_log"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
+	"eicesoft/proxy-api/internal/model/request_log"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
 	"encoding/json"
 	"github.com/go-resty/resty/v2"
 	"reflect"

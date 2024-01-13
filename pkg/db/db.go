@@ -1,7 +1,7 @@
 package db
 
 import (
-	"eicesoft/web-demo/config"
+	"eicesoft/proxy-api/config"
 	"fmt"
 	"github.com/pkg/errors"
 	"gorm.io/driver/mysql"

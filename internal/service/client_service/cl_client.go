@@ -1,8 +1,8 @@
 package client_service
 
 import (
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
 )
 
 var _ CLClientService = (*clClientStruct)(nil)

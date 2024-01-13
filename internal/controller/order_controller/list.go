@@ -1,9 +1,9 @@
 package order_controller
 
 import (
-	"eicesoft/web-demo/internal/controller"
-	orders "eicesoft/web-demo/internal/model/order"
-	"eicesoft/web-demo/pkg/core"
+	"eicesoft/proxy-api/internal/controller"
+	orders "eicesoft/proxy-api/internal/model/order"
+	"eicesoft/proxy-api/pkg/core"
 )
 
 type orderListResponse struct {

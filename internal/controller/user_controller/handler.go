@@ -1,11 +1,11 @@
 package user_controller
 
 import (
-	"eicesoft/web-demo/internal/service/client_service"
-	"eicesoft/web-demo/internal/service/user_service"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
-	"eicesoft/web-demo/pkg/mux"
+	"eicesoft/proxy-api/internal/service/client_service"
+	"eicesoft/proxy-api/internal/service/user_service"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
+	"eicesoft/proxy-api/pkg/mux"
 	"go.uber.org/zap"
 )
 

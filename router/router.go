@@ -1,10 +1,10 @@
 package router
 
 import (
-	"eicesoft/web-demo/internal/middleware"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
-	"eicesoft/web-demo/pkg/mux"
+	"eicesoft/proxy-api/internal/middleware"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
+	"eicesoft/proxy-api/pkg/mux"
 	"go.uber.org/zap"
 )
 

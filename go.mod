@@ -1,4 +1,4 @@
-module eicesoft/web-demo
+module eicesoft/proxy-api
 
 go 1.21
 

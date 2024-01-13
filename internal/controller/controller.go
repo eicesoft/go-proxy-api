@@ -1,6 +1,6 @@
 package controller
 
-import "eicesoft/web-demo/pkg/core"
+import "eicesoft/proxy-api/pkg/core"
 
 type RouteInfo struct {
 	Path    string

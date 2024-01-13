@@ -1,7 +1,7 @@
 package config
 
 import (
-	"eicesoft/web-demo/pkg/env"
+	"eicesoft/proxy-api/pkg/env"
 	"fmt"
 	"github.com/spf13/viper"
 	"time"

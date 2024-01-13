@@ -23,8 +23,8 @@ import (
 	"fmt"
 	"time"
 
-	"eicesoft/web-demo/internal/model"
-	"eicesoft/web-demo/pkg/core"
+	"eicesoft/proxy-api/internal/model"
+	"eicesoft/proxy-api/pkg/core"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 )

@@ -2,12 +2,12 @@ package main
 
 import (
 	"context"
-	"eicesoft/web-demo/config"
-	"eicesoft/web-demo/pkg/db"
-	"eicesoft/web-demo/pkg/env"
-	"eicesoft/web-demo/pkg/logger"
-	"eicesoft/web-demo/pkg/shutdown"
-	"eicesoft/web-demo/router"
+	"eicesoft/proxy-api/config"
+	"eicesoft/proxy-api/pkg/db"
+	"eicesoft/proxy-api/pkg/env"
+	"eicesoft/proxy-api/pkg/logger"
+	"eicesoft/proxy-api/pkg/shutdown"
+	"eicesoft/proxy-api/router"
 	"flag"
 	"fmt"
 	"go.uber.org/zap"

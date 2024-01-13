@@ -1,15 +1,15 @@
 package main
 
 import (
-	"eicesoft/web-demo/config"
-	"eicesoft/web-demo/pkg/db"
+	"eicesoft/proxy-api/config"
+	"eicesoft/proxy-api/pkg/db"
 	"flag"
 	"fmt"
 	"go.uber.org/zap"
 	"os"
 	"strings"
 
-	"eicesoft/web-demo/cmd/genmodel/pkg"
+	"eicesoft/proxy-api/cmd/genmodel/pkg"
 )
 
 var (

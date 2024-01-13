@@ -1,11 +1,11 @@
 package order_controller
 
 import (
-	"eicesoft/web-demo/internal/controller"
-	"eicesoft/web-demo/internal/service/order_service"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
-	"eicesoft/web-demo/pkg/mux"
+	"eicesoft/proxy-api/internal/controller"
+	"eicesoft/proxy-api/internal/service/order_service"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
+	"eicesoft/proxy-api/pkg/mux"
 	"go.uber.org/zap"
 )
 

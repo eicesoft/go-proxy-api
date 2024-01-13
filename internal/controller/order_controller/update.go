@@ -1,11 +1,11 @@
 package order_controller
 
 import (
-	"eicesoft/web-demo/internal/controller"
-	"eicesoft/web-demo/internal/message"
-	"eicesoft/web-demo/internal/service/order_service"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/errno"
+	"eicesoft/proxy-api/internal/controller"
+	"eicesoft/proxy-api/internal/message"
+	"eicesoft/proxy-api/internal/service/order_service"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/errno"
 	"net/http"
 )
 

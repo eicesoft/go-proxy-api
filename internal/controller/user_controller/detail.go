@@ -1,10 +1,10 @@
 package user_controller
 
 import (
-	"eicesoft/web-demo/internal/message"
-	"eicesoft/web-demo/internal/service/client_service"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/errno"
+	"eicesoft/proxy-api/internal/message"
+	"eicesoft/proxy-api/internal/service/client_service"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/errno"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )

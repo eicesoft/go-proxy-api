@@ -1,10 +1,10 @@
 package router
 
 import (
-	"eicesoft/web-demo/internal/controller/auth_controller"
-	"eicesoft/web-demo/internal/controller/order_controller"
-	"eicesoft/web-demo/internal/controller/user_controller"
-	"eicesoft/web-demo/pkg/mux"
+	"eicesoft/proxy-api/internal/controller/auth_controller"
+	"eicesoft/proxy-api/internal/controller/order_controller"
+	"eicesoft/proxy-api/internal/controller/user_controller"
+	"eicesoft/proxy-api/pkg/mux"
 )
 
 // 设置Api路由

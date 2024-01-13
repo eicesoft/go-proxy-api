@@ -1,13 +1,13 @@
 package core
 
 import (
-	"eicesoft/web-demo/config"
-	_ "eicesoft/web-demo/docs"
-	"eicesoft/web-demo/internal/message"
-	"eicesoft/web-demo/pkg/color"
-	"eicesoft/web-demo/pkg/env"
-	"eicesoft/web-demo/pkg/errno"
-	"eicesoft/web-demo/pkg/trace"
+	"eicesoft/proxy-api/config"
+	_ "eicesoft/proxy-api/docs"
+	"eicesoft/proxy-api/internal/message"
+	"eicesoft/proxy-api/pkg/color"
+	"eicesoft/proxy-api/pkg/env"
+	"eicesoft/proxy-api/pkg/errno"
+	"eicesoft/proxy-api/pkg/trace"
 	"fmt"
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"

@@ -1,10 +1,10 @@
 package order_service
 
 import (
-	"eicesoft/web-demo/internal/model"
-	orders "eicesoft/web-demo/internal/model/order"
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/db"
+	"eicesoft/proxy-api/internal/model"
+	orders "eicesoft/proxy-api/internal/model/order"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/db"
 )
 
 var _ OrderService = (*orderService)(nil)

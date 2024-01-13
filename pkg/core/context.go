@@ -3,8 +3,8 @@ package core
 import (
 	"bytes"
 	stdctx "context"
-	"eicesoft/web-demo/pkg/errno"
-	"eicesoft/web-demo/pkg/trace"
+	"eicesoft/proxy-api/pkg/errno"
+	"eicesoft/proxy-api/pkg/trace"
 	"io"
 	"net/http"
 	"net/url"

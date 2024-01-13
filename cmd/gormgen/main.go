@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"eicesoft/web-demo/cmd/gormgen/pkg"
+	"eicesoft/proxy-api/cmd/gormgen/pkg"
 )
 
 var (

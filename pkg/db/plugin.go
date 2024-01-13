@@ -1,9 +1,9 @@
 package db
 
 import (
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/time_parse"
-	"eicesoft/web-demo/pkg/trace"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/time_parse"
+	"eicesoft/proxy-api/pkg/trace"
 	"gorm.io/gorm"
 	"gorm.io/gorm/utils"
 	"time"

@@ -6,8 +6,8 @@
 package user
 
 import (
-	"eicesoft/web-demo/internal/model"
-	"eicesoft/web-demo/pkg/core"
+	"eicesoft/proxy-api/internal/model"
+	"eicesoft/proxy-api/pkg/core"
 	"fmt"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"

@@ -1,8 +1,8 @@
 package middleware
 
 import (
-	"eicesoft/web-demo/pkg/core"
-	"eicesoft/web-demo/pkg/errno"
+	"eicesoft/proxy-api/pkg/core"
+	"eicesoft/proxy-api/pkg/errno"
 	"go.uber.org/zap"
 )
 
