@@ -21,7 +21,7 @@ type token struct {
 }
 
 type claims struct {
-	UserID int32
+	AppId int32
 	jwt.StandardClaims
 }
 

@@ -6,6 +6,7 @@ type App struct {
 	Name      string `json:"name"`
 	AppKey    string `json:"app_key"`
 	AppSecret string `json:"app_secret"`
+	Status    int8   `json:"status"`
 	CreatedAt int64  `gorm:"time" json:"created_at"` // 创建时间
 }
 

@@ -1,7 +1,8 @@
 package errno
 
 import (
-	"encoding/json"
+	"eicesoft/proxy-api/internal/message"
+	"fmt"
 	"github.com/pkg/errors"
 )
 
@@ -18,7 +19,7 @@ type Error interface {
 	// GetMsg 获取 Msg
 	GetMsg() string
 	// ToString 返回 JSON 格式的错误详情
-	ToString() string
+	GetJson() *message.Failure
 }
 
 type err struct {
@@ -55,18 +56,22 @@ func (e *err) GetMsg() string {
 	return e.Message
 }
 
-// ToString 返回 JSON 格式的错误详情
-func (e *err) ToString() string {
-	err := &struct {
-		HttpCode     int    `json:"code"`
-		BusinessCode int    `json:"error_code"`
-		Message      string `json:"message"`
-	}{
-		HttpCode:     e.HttpCode,
-		BusinessCode: e.BusinessCode,
-		Message:      e.Message,
+// GetJson 返回错误详情
+func (e *err) GetJson() *message.Failure {
+	var err message.Failure
+	if e.Err != nil {
+		err = message.Failure{
+			Code:    e.BusinessCode,
+			Data:    e.Err,
+			Message: fmt.Sprintf("%s: %s", e.Message, e.Err.Error()),
+		}
+	} else {
+		err = message.Failure{
+			Code:    e.BusinessCode,
+			Data:    e.Err,
+			Message: fmt.Sprintf("%s", e.Message),
+		}
 	}
 
-	raw, _ := json.Marshal(err)
-	return string(raw)
+	return &err
 }

@@ -7,7 +7,6 @@ import (
 	"eicesoft/proxy-api/pkg/core"
 	"eicesoft/proxy-api/pkg/errno"
 	"eicesoft/proxy-api/pkg/token"
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -30,7 +29,6 @@ func (h *handler) Generate() *controller.RouteInfo {
 		Path: "token",
 		Closure: func(c core.Context) {
 			req := new(authRequest)
-			h.logger.Info(req.AppKey)
 			if err := c.ShouldBindQuery(req); err != nil {
 				c.AbortWithError(errno.NewError(
 					http.StatusBadRequest,
@@ -42,7 +40,7 @@ func (h *handler) Generate() *controller.RouteInfo {
 
 			app := h.appService.Verification(req.AppKey, req.AppSecret)
 
-			if app == nil { //验证失败
+			if app == nil || app.Status == 0 { //验证失败
 				c.AbortWithError(errno.NewError(
 					http.StatusBadRequest,
 					message.GenerateTokenError,
@@ -50,8 +48,6 @@ func (h *handler) Generate() *controller.RouteInfo {
 				)
 				return
 			}
-
-			h.logger.Info(fmt.Sprintf("sdgsdgasg %d", app.Id))
 
 			cfg := config.Get().JWT
 			tokenString, err := token.New(cfg.Secret).JwtSign(app.Id, time.Hour*cfg.ExpireDuration)

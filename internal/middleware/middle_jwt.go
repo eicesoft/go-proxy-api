@@ -32,12 +32,23 @@ func (m *middleware) Jwt(ctx core.Context) (userId int32, err errno.Error) {
 		return
 	}
 
-	userId = claims.UserID
+	//m.logger.Info(fmt.Sprintf("expireAt: %d - %d = %d", claims.ExpiresAt, time.Now().Unix(),
+	//	claims.ExpiresAt-time.Now().Unix()))
+	//if claims.ExpiresAt-time.Now().Unix() <= 0 { //签名已过期
+	//	err = errno.NewError(
+	//		http.StatusUnauthorized,
+	//		message.AuthorizationError,
+	//		message.Text(message.AuthorizationError)).WithErr(errors.New("authorization is expired"))
+	//
+	//	return
+	//}
+
+	userId = claims.AppId
 	if userId <= 0 {
 		err = errno.NewError(
 			http.StatusUnauthorized,
 			message.AuthorizationError,
-			message.Text(message.AuthorizationError)).WithErr(errors.New("claims.UserID <= 0 "))
+			message.Text(message.AuthorizationError)).WithErr(errors.New("claims.AppId <= 0 "))
 
 		return
 	}

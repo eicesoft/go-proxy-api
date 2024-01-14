@@ -59,7 +59,7 @@ func wrapHandlers(handlers ...HandlerFunc) []gin.HandlerFunc {
 	return funcs
 }
 
-// WrapAuthHandler 用来处理 Auth 的入口，在之后的handler中只需 ctx.UserID()
+// WrapAuthHandler 用来处理 Auth 的入口，在之后的handler中只需 ctx.AppId()
 func WrapAuthHandler(handler func(Context) (userID int32, err errno.Error)) HandlerFunc {
 	return func(ctx Context) {
 		userID, err := handler(ctx)
@@ -275,18 +275,13 @@ func New(logger *zap.Logger) (Mux, error) {
 			if ctx.IsAborted() { //
 				if err := context.abortError(); err != nil {
 					response = err
-					businessCode = err.GetBusinessCode()
-					businessCodeMsg = err.GetMsg()
 
 					if x := context.Trace(); x != nil {
 						context.SetHeader(trace.Header, x.ID())
 						//traceId = x.ID()
 					}
 
-					ctx.JSON(err.GetHttpCode(), &message.Failure{
-						Code:    businessCode,
-						Message: businessCodeMsg,
-					})
+					ctx.JSON(err.GetHttpCode(), err.GetJson())
 				}
 			} else {
 				response = context.getPayload()
@@ -341,7 +336,7 @@ func New(logger *zap.Logger) (Mux, error) {
 				zap.Any("success", t.Success),
 				zap.Any("cost_seconds", t.CostSeconds),
 				zap.Any("trace_id", t.Identifier),
-				//zap.Any("trace_info", t),
+				zap.Any("trace_info", t),
 				zap.Error(abortErr),
 			)
 		}()
