@@ -118,6 +118,8 @@ type Context interface {
 	// UserID 获取 JWT 中 UserID
 	UserID() int32
 	setUserID(userID int32)
+
+	Success(code int32, message string, data interface{})
 }
 
 type context struct {
@@ -325,6 +327,14 @@ func (c *context) UserID() int32 {
 
 func (c *context) setUserID(userID int32) {
 	c.ctx.Set(_UserID, userID)
+}
+
+func (c *context) Success(code int32, message string, data interface{}) {
+	c.Payload(gin.H{
+		"message": message,
+		"data":    data,
+		"code":    code,
+	})
 }
 
 func (c *context) init() {

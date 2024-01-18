@@ -336,7 +336,7 @@ func New(logger *zap.Logger) (Mux, error) {
 				zap.Any("success", t.Success),
 				zap.Any("cost_seconds", t.CostSeconds),
 				zap.Any("trace_id", t.Identifier),
-				zap.Any("trace_info", t),
+				//zap.Any("trace_info", t),
 				zap.Error(abortErr),
 			)
 		}()

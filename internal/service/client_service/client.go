@@ -47,8 +47,8 @@ func ConvertStruct[T any](input map[string]interface{}, output *T) error {
 
 type ClientService interface {
 	h() // private 为了避免被其他包实现
-	Post(url string, params map[string]string) (interface{}, error)
-	Get(url string, params map[string]string) (interface{}, error)
+	Post(url string, params map[string]string, path string) (interface{}, error)
+	Get(url string, params map[string]string, path string) (interface{}, error)
 }
 
 type ClientStruct struct {
@@ -61,6 +61,7 @@ type ClientStruct struct {
 func (c *ClientStruct) Get(
 	url string,
 	params map[string]string,
+	path string,
 ) (interface{}, error) {
 	t := new(interface{})
 
@@ -79,7 +80,20 @@ func (c *ClientStruct) Get(
 }
 
 // Post request data to url
-func (c *ClientStruct) Post(url string, params map[string]string) (interface{}, error) {
+func (c *ClientStruct) Post(url string, params map[string]string, path string) (interface{}, error) {
+	buf, _ := json.Marshal(params)
+
+	c.db.GetDbW().Create(&request_log.RequestLog{
+		ClientId:  ClientId,
+		Path:      path,
+		Params:    string(buf),
+		AppId:     c.context.UserID(),
+		CreatedAt: time.Now().Unix(),
+	})
+
+	params["appId"] = "Kssn4per"
+	params["appKey"] = "KIzwjxaU"
+
 	t := new(interface{})
 	resp, err := c.restyClient.R().
 		SetFormData(params).
@@ -91,15 +105,6 @@ func (c *ClientStruct) Post(url string, params map[string]string) (interface{}, 
 	if err != nil && resp.IsSuccess() {
 		return *t, err
 	}
-
-	buf, _ := json.Marshal(params)
-	c.db.GetDbW().Create(&request_log.RequestLog{
-		ClientId:  ClientId,
-		Path:      url,
-		Params:    string(buf),
-		AppId:     c.context.UserID(),
-		CreatedAt: time.Now().Unix(),
-	})
 
 	return *t, nil
 }

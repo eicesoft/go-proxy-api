@@ -4,17 +4,16 @@ import (
 	"context"
 	"eicesoft/proxy-api/config"
 	"eicesoft/proxy-api/pkg/db"
-	"eicesoft/proxy-api/pkg/env"
 	"eicesoft/proxy-api/pkg/logger"
 	"eicesoft/proxy-api/pkg/shutdown"
 	"eicesoft/proxy-api/router"
 	"errors"
 	"flag"
-	"fmt"
-	"go.uber.org/zap"
 	"math/rand"
 	"net/http"
 	"time"
+
+	"go.uber.org/zap"
 )
 
 func init() {
@@ -36,7 +35,7 @@ func init() {
 func main() {
 	loggers, err := logger.NewJSONLogger(
 		logger.WithDebugLevel(),
-		logger.WithField("app", fmt.Sprintf("%s[%s]", config.Get().Server.Name, env.Get().Value())),
+		//logger.WithField("app", fmt.Sprintf("%s[%s]", config.Get().Server.Name, env.Get().Value())),
 		logger.WithTimeLayout("2006-01-02 15:04:05"),
 		logger.WithFileP(config.ProjectLogFile()),
 	)

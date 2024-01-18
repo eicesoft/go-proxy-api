@@ -1,4 +1,4 @@
-package user_controller
+package check_controller
 
 import (
 	"eicesoft/proxy-api/internal/service/client_service"
@@ -9,15 +9,15 @@ import (
 	"go.uber.org/zap"
 )
 
-const GroupRouterName = "/user"
+const GroupRouterName = "/check"
 
 var _ Handler = (*handler)(nil)
 
 // Handler 用户控制器接口
 type Handler interface {
 	RegistryRouter(r *mux.Resource)
-	Detail() (string, core.HandlerFunc)
-	Test() (string, core.HandlerFunc)
+	CheckNumbers() (string, core.HandlerFunc)
+	Blacklist() (string, core.HandlerFunc)
 }
 
 type handler struct {
@@ -39,6 +39,7 @@ func New(logger *zap.Logger, db db.Repo) Handler {
 func (h *handler) RegistryRouter(r *mux.Resource) {
 	user := r.Mux.Group(GroupRouterName, core.WrapAuthHandler(r.Middles.Jwt))
 
-	user.GET(h.Detail())
-	user.GET(h.Test())
+	user.GET(h.CheckNumbers())
+	user.GET(h.RealCheckNumber())
+	user.GET(h.Blacklist())
 }
